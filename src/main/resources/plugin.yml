@@ -1,6 +1,6 @@
 name: playerheads
 version: '${version}'
-main: org.github.schmolldechse.playerheads.Playerheads
+main: com.github.schmolldechse.playerheads.Playerheads
 api-version: '1.20'
 authors: [Schmolldechse]
 description: plugin to extract players head as Component

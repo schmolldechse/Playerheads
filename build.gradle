@@ -4,7 +4,7 @@ plugins {
     id ("io.papermc.paperweight.userdev") version "1.5.10"
 }
 
-group = 'org.github.schmolldechse'
+group = 'com.github.schmolldechse'
 version = '1.0-SNAPSHOT'
 
 repositories {
