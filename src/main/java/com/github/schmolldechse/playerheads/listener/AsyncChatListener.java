@@ -1,7 +1,6 @@
 package com.github.schmolldechse.playerheads.listener;
 
 import com.github.schmolldechse.playerheads.Playerheads;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
@@ -18,8 +17,7 @@ import java.util.concurrent.ExecutionException;
 @Singleton
 public class AsyncChatListener implements Listener, ChatRenderer {
 
-    @Inject
-    private Playerheads plugin;
+    private final Playerheads plugin;
 
     public AsyncChatListener(Playerheads plugin) {
         this.plugin = plugin;
@@ -27,19 +25,16 @@ public class AsyncChatListener implements Listener, ChatRenderer {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void listen(AsyncChatEvent event) {
-        event.renderer(this::render);
+        event.renderer(this);
     }
 
     @Override
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
         try {
-            Component component = Component.empty()
-                    .append(this.plugin.imageService.component(source.getUniqueId()))
+            return this.plugin.imageService.component(source.getUniqueId())
                     .append(sourceDisplayName)
                     .append(Component.text(": "))
                     .append(message);
-
-            return component;
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
